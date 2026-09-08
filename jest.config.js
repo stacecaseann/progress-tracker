@@ -105,6 +105,7 @@ export default {
 
   // A preset that is used as a base for Jest's configuration
   // I'm using typescript through ts-jest and my project uses es modules
+  preset: "ts-jest/presets/default-esm",
   testEnvironment: "node",
   extensionsToTreatAsEsm: [".ts"],
   transform: {

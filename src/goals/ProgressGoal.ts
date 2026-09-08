@@ -1,5 +1,5 @@
 import type { GoalType } from "./GoalType.js";
-import type { FrequencyUnit } from "./FrequencyUnit.js";
+import type { ValueUnit } from "./ValueUnit.js";
 import { Goal } from "./Goal.js";
 import type {
   ProgressGoalData,
@@ -7,21 +7,25 @@ import type {
 } from "./ProgressGoalData.js";
 
 export class ProgressGoal extends Goal {
-  public frequency: number;
-  public frequencyUnit: FrequencyUnit;
+  public value: number;
+  public valueUnit: ValueUnit;
+  public dateBy: Date | undefined;
   readonly type: GoalType = "progress";
 
   constructor(data: ProgressGoalData) {
     super(data);
-    this.frequency = data.frequency;
-    this.frequencyUnit = data.frequencyUnit;
+    this.value = data.value;
+    this.valueUnit = data.valueUnit;
+    this.dateBy = data.dateBy;
   }
 
-  override updateGoal(updateData: ProgressGoalUpdates): void {
-    Object.assign(this, updateData);
+  override updateGoal(updateData: ProgressGoalUpdates): ProgressGoal {
+    return new ProgressGoal({
+      ...this,
+      ...updateData,
+    });
   }
-
   get description(): string {
-    return `${this.name} ${this.value} times per ${this.valueUnit}${this.dateBy === undefined ? "" : " by " + this.dateBy}`;
+    return `${this.name} ${this.value} ${this.valueUnit}${this.dateBy === undefined ? "" : " by " + this.dateBy.toLocaleDateString()}`;
   }
 }

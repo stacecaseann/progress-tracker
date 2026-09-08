@@ -1,1 +1,1 @@
-export type GoalType = "progress" | "frequency" | "streak";
+export type GoalType = "count" | "progress" | "frequency" | "streak";
