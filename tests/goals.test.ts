@@ -12,6 +12,8 @@ describe("addGoal", () => {
     const countGoalData: CountGoalData = {
       id: crypto.randomUUID(),
       name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
       valueUnit: "min",
     };
     const goal = new CountGoal(countGoalData);
@@ -28,6 +30,8 @@ describe("removeGoal", () => {
     const countGoalData: CountGoalData = {
       id: goalId,
       name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
       valueUnit: "min",
     };
     const goal = new CountGoal(countGoalData);
@@ -43,6 +47,8 @@ describe("updateGoal", () => {
     const countGoalData: CountGoalData = {
       id: goalId,
       name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
       valueUnit: "min",
     };
     const goal = new CountGoal(countGoalData);

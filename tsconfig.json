@@ -8,7 +8,7 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
-    "types": [],
+    "types": ["node"], //let's me use "node:fs/promises";
     "noEmitOnError": true,
     // For nodejs:
     // "lib": ["esnext"],
@@ -20,7 +20,7 @@
     "declaration": true,
     "declarationMap": true,
 
-    // Stricter Typechecking Options
+    // Stricter TypecheckIng Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
 

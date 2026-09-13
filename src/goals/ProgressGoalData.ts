@@ -1,8 +1,8 @@
 import type { GoalData } from "./GoalData.js";
-import type { ValueUnit } from "./ValueUnit.js";
+
 export type ProgressGoalData = GoalData & {
+  type: "progress";
   value: number;
-  valueUnit: ValueUnit;
   dateBy: Date | undefined;
 };
 

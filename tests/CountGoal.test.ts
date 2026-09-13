@@ -5,16 +5,72 @@ import type {
 } from "../src/goals/CountGoalData.js";
 import { CountGoal } from "../src/goals/CountGoal.js";
 import { Goal } from "../src/goals/Goal.js";
+import type { CheckIn } from "../src/checkIns/CheckIn.js";
 
 describe("description", () => {
   test("expects description", () => {
     const countGoalData: CountGoalData = {
       id: crypto.randomUUID(),
       name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
       valueUnit: "min",
     };
     const goal = new CountGoal(countGoalData);
     expect(goal.description).toBe("Practice Piano (count min)");
+  });
+});
+
+describe("progress", () => {
+  test("expects progress", () => {
+    const goalId = crypto.randomUUID();
+    const countGoalData: CountGoalData = {
+      id: goalId,
+      name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
+      valueUnit: "min",
+    };
+    const checkIns = [
+      {
+        goalId,
+        checkInDate: new Date(2026, 0, 1),
+        value: 20,
+      },
+      {
+        goalId,
+        checkInDate: new Date(2026, 0, 2),
+        value: 20,
+      },
+      {
+        goalId,
+        checkInDate: new Date(2026, 0, 3),
+        value: 20,
+      },
+    ];
+    const goal = new CountGoal(countGoalData);
+    const goalProgress = goal.calculateProgress(checkIns);
+    expect(goalProgress).toEqual({
+      value: 60,
+      description: "60 min completed!",
+    });
+  });
+  test("no progress", () => {
+    const goalId = crypto.randomUUID();
+    const countGoalData: CountGoalData = {
+      id: goalId,
+      name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
+      valueUnit: "min",
+    };
+    const checkIns: CheckIn[] = [];
+    const goal = new CountGoal(countGoalData);
+    const goalProgress = goal.calculateProgress(checkIns);
+    expect(goalProgress).toEqual({
+      value: 0,
+      description: "0 min completed!",
+    });
   });
 });
 
@@ -23,6 +79,8 @@ describe("update", () => {
     const countGoalData: CountGoalData = {
       id: crypto.randomUUID(),
       name: "Practice Piano",
+      type: "count",
+      startDate: new Date(2026, 0, 31),
       valueUnit: "min",
     };
     const goal = new CountGoal(countGoalData);

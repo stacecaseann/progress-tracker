@@ -1,10 +1,9 @@
 import type { FrequencyUnit } from "./FrequencyUnit.js";
-import type { ValueUnit } from "./ValueUnit.js";
 import type { GoalData } from "./GoalData.js";
 
 export type FrequencyGoalData = GoalData & {
+  type: "frequency";
   value: number;
-  valueUnit: ValueUnit;
   frequency: number;
   frequencyUnit: FrequencyUnit;
   dateBy: Date | undefined;
