@@ -11,18 +11,30 @@ import { FrequencyGoal } from "./FrequencyGoal.js";
 import { ProgressGoal } from "./ProgressGoal.js";
 import { StreakGoal } from "./StreakGoal.js";
 
+//These are the basic functions used to manipulate goals in the program
+
+//Adds goals to an array, keeps it idempotent, meaning it doesn't change the original array sent in
 export function addGoal(goals: Goal[], goal: Goal) {
   return [...goals, goal];
 }
 
+//Removes goals from an array
+//I need to check this if it's idempotent
 export function removeGoal(goals: Goal[], goalId: string) {
   return goals.filter((g) => g.id != goalId);
 }
 
+//Updates goals in an array
+//I need to check this if it's idempotent
 export function updateGoal(goals: Goal[], updatedGoal: Goal): Goal[] {
   return goals.map((goal) => (goal.id === updatedGoal.id ? updatedGoal : goal));
 }
 
+//Loads goals from the json file
+//The file logic is extracted out, but this builds the correct data to send
+//And creates the correct classes from the data
+//I probably need to handle the utc time zone
+//Dates have to be constructed back from the string
 export async function loadGoals(): Promise<Goal[]> {
   const goalDataDto = await readGoalsFromFile();
   const goalData: Goal[] = goalDataDto.map((goal) => {
@@ -54,11 +66,16 @@ export async function loadGoals(): Promise<Goal[]> {
   return goalData;
 }
 
+//This saves goals to the file
+//First it converts to the data object, then calls the file util to actually save the file
 export async function saveGoals(goals: Goal[]) {
   const goalDataDto = goals.map((goalDto) => goalDto.toData());
   await saveGoalsToFile(goalDataDto);
 }
 
+//Loads check-ins from the json file
+//The file logic is extracted out, but this builds the correct data to send
+//And creates the correct CheckIn type from the data
 export async function loadCheckIns(): Promise<CheckIn[]> {
   const checkInData = await readCheckInsFromFile();
   //I did need help to fix my json being in utc time to converting to local time.
@@ -74,6 +91,8 @@ export async function loadCheckIns(): Promise<CheckIn[]> {
   return checkIns;
 }
 
+//Converts the Check-Ins to the data type and saves to the file
+//We have to convert the date to a string
 export async function saveCheckIns(checkIns: CheckIn[]) {
   const checkInsToSave = checkIns.map((checkIn) => ({
     ...checkIn,

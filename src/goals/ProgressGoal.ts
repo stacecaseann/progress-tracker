@@ -7,17 +7,24 @@ import type {
   ProgressGoalUpdates,
 } from "./ProgressGoalData.js";
 
+//The Progress Goal class is a like a Count Goal but has a value and optional date by to complete
+//For example, 300 min of practicing the guitar
+//Or 1000 hours practicing programming by the end of the year
+//This class extends the Goal class
+
 export class ProgressGoal extends Goal {
   public value: number;
   public dateBy: Date | undefined;
   readonly type: GoalType = "progress";
 
+  //The constructor will pass the base data to the Goal class
   constructor(data: ProgressGoalData) {
     super(data);
     this.value = data.value;
     this.dateBy = data.dateBy;
   }
 
+  //This overrides the base class and updates the goal class with the updated data
   override updateGoal(updateData: ProgressGoalUpdates): ProgressGoal {
     return new ProgressGoal({
       ...this,
@@ -25,12 +32,18 @@ export class ProgressGoal extends Goal {
     });
   }
 
+  //This overrides the base class and calculates progress by adding up all the check-ins for this goal
   override calculateProgress(checkIns: CheckIn[]): GoalProgress {
-    const filteredCheckIns = checkIns.filter((checkIn) => checkIn.goalId === this.id);
+    const filteredCheckIns = checkIns.filter(
+      (checkIn) => checkIn.goalId === this.id
+    );
     let total = 0;
     const dateBy = this.dateBy; //for this narrowing to work, I can't use this.dateBy in my else and have it assume it's undefined
     if (dateBy === undefined) {
-      total = filteredCheckIns.reduce((total, checkIn) => total + checkIn.value, 0);
+      total = filteredCheckIns.reduce(
+        (total, checkIn) => total + checkIn.value,
+        0
+      );
     } else {
       total = filteredCheckIns
         .filter((checkIn) => checkIn.checkInDate <= dateBy)
@@ -42,10 +55,12 @@ export class ProgressGoal extends Goal {
     };
   }
 
+  //This is a property that returns the description for this type of goal
   get description(): string {
     return `${this.name} ${this.value} ${this.valueUnit}${this.dateBy === undefined ? "" : " by " + this.dateBy.toLocaleDateString()}`;
   }
 
+  //This converts the Goal object to the Data object that will be saved in the json file
   override toData(): ProgressGoalData {
     return {
       id: this.id,

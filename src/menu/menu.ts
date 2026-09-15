@@ -13,6 +13,9 @@ import type { ProgressGoalData } from "../goals/ProgressGoalData.js";
 import type { CountGoalData } from "../goals/CountGoalData.js";
 import type { FrequencyGoalData } from "../goals/FrequencyGoalData.js";
 
+//This class creates the menu used to run the program
+
+//Create the menu
 export async function createMenu(
   goals: Goal[],
   checkIns: CheckIn[],
@@ -63,12 +66,14 @@ export async function createMenu(
   };
 }
 
+//View the goals
 async function viewGoals(goals: Goal[], readline: Interface) {
   showGoals(goals);
   await readline.question("Press Enter to continue...");
   console.log("");
 }
 
+//View the progress for each goal
 function viewProgress(goals: Goal[], checkIns: CheckIn[]) {
   console.log("Progress:");
   console.log();
@@ -81,6 +86,7 @@ function viewProgress(goals: Goal[], checkIns: CheckIn[]) {
   console.log();
 }
 
+//Add goals
 async function addGoals(goals: Goal[], readline: Interface): Promise<Goal[]> {
   console.log();
   console.log("1. Progress Goal");
@@ -121,6 +127,7 @@ async function addGoals(goals: Goal[], readline: Interface): Promise<Goal[]> {
   return goals;
 }
 
+//Show the goals in the console
 function showGoals(goals: Goal[]) {
   console.log("Goals:");
   console.log();
@@ -131,6 +138,8 @@ function showGoals(goals: Goal[]) {
   console.log();
 }
 
+//Creates a CountGoal
+//This creates all the fields needed to send to the constructor of the class
 async function createCountGoal(readline: Interface): Promise<Goal> {
   const name = await pickName(readline);
   const valueUnit = await pickValueUnit(readline);
@@ -146,6 +155,8 @@ async function createCountGoal(readline: Interface): Promise<Goal> {
   return goal;
 }
 
+//Creates a ProgressGoal
+//This creates all the fields needed to send to the constructor of the class
 async function createProgressGoal(readline: Interface): Promise<Goal> {
   const name = await pickName(readline);
   const value = await pickProgressValue(readline);
@@ -166,13 +177,16 @@ async function createProgressGoal(readline: Interface): Promise<Goal> {
   await logFinalGoal(goal);
   return goal;
 }
-
+//Shows the description of the goal after you've saved all the fields separately
 async function logFinalGoal(goal: Goal) {
   console.log("");
   console.log("Here is your final goal:");
   console.log("");
   console.log(goal.description);
 }
+
+//Creates a StreakGoal
+//This creates all the fields needed to send to the constructor of the class
 async function createStreakGoal(readline: Interface): Promise<Goal> {
   const name = await pickName(readline);
   const value = await pickValue(readline);
@@ -192,6 +206,8 @@ async function createStreakGoal(readline: Interface): Promise<Goal> {
   return goal;
 }
 
+//Creates a FrequencyGoal
+//This creates all the fields needed to send to the constructor of the class
 async function createFrequencyGoal(readline: Interface): Promise<Goal> {
   const name = await pickName(readline);
   const value = await pickValue(readline);
@@ -215,24 +231,30 @@ async function createFrequencyGoal(readline: Interface): Promise<Goal> {
   return goal;
 }
 
+//Creates the goal id
 function createId(): string {
   return crypto.randomUUID();
 }
+
+//Creates the name of the goal
 async function pickName(readline: Interface): Promise<string> {
   console.log();
   const name = await readline.question("What do you want to accomplish? ");
   return name;
 }
+//Creates the start date
 async function pickStartDate(readline: Interface): Promise<Date> {
   console.log();
   const startDate = await readline.question("What day do you want to start? ");
   return new Date(startDate);
 }
+//Creates the value
 async function pickValue(readline: Interface): Promise<number> {
   console.log();
   const value = await readline.question("How many min/pages/hours a day? ");
   return Number(value);
 }
+//Creates the value for progress goals, which is worded a little differently
 async function pickProgressValue(readline: Interface): Promise<number> {
   console.log();
   const value = await readline.question(
@@ -240,6 +262,8 @@ async function pickProgressValue(readline: Interface): Promise<number> {
   );
   return Number(value);
 }
+
+//Creates the value unit
 async function pickValueUnit(readline: Interface): Promise<ValueUnit> {
   console.log();
   console.log("1. Pages");
@@ -257,6 +281,7 @@ async function pickValueUnit(readline: Interface): Promise<ValueUnit> {
   else throw Error("Input is not valid");
 }
 
+//Creates the Frequency
 async function pickFrequency(readline: Interface): Promise<number> {
   console.log();
   const value = await readline.question(
@@ -264,6 +289,8 @@ async function pickFrequency(readline: Interface): Promise<number> {
   );
   return Number(value);
 }
+
+//Creates the frequency unit
 async function pickFrequencyUnit(readline: Interface): Promise<FrequencyUnit> {
   console.log();
   console.log("1. Days/week");
@@ -281,6 +308,7 @@ async function pickFrequencyUnit(readline: Interface): Promise<FrequencyUnit> {
   else throw Error("Input is not valid");
 }
 
+//Creates the DateBy
 async function pickDateBy(readline: Interface): Promise<Date | undefined> {
   console.log();
   const dateBy = await readline.question(
@@ -290,6 +318,7 @@ async function pickDateBy(readline: Interface): Promise<Date | undefined> {
   else return new Date(dateBy);
 }
 
+//Removes a goal from the array
 async function removeGoals(
   goals: Goal[],
   readline: Interface
@@ -308,6 +337,7 @@ async function removeGoals(
   return newGoals;
 }
 
+//Adds a check-in
 async function addCheckIns(
   goals: Goal[],
   checkIns: CheckIn[],
@@ -339,12 +369,14 @@ async function addCheckIns(
   return checkIns;
 }
 
+//Creates the Check-in Date
 async function pickCheckInDate(readline: Interface): Promise<Date> {
   console.log();
   const startDate = await readline.question("What day? ");
   return new Date(startDate);
 }
 
+//Creates the Check-in value
 async function pickCheckInValue(
   goal: Goal,
   readline: Interface
@@ -355,6 +387,7 @@ async function pickCheckInValue(
   return Number(value);
 }
 
+//View all the check-ins
 function viewCheckIns(goal: Goal, checkIns: CheckIn[]) {
   console.log("");
 
@@ -368,6 +401,7 @@ function viewCheckIns(goal: Goal, checkIns: CheckIn[]) {
     )
   );
 }
+//View progress on a particular goal
 function viewProgressForOneGoal(goal: Goal, checkIns: CheckIn[]) {
   console.log("Progress:");
   console.log("");

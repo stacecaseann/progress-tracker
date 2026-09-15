@@ -10,6 +10,14 @@ import type {
   FrequencyGoalUpdates,
 } from "./FrequencyGoalData.js";
 
+//The Frequency Goal class is a goal where you save the value per day and the unit of that value
+//For example, 20 min a day, 2 hours a day, 10 pages a day
+//You also specify the frequency
+//1 day means every day, although as I type it I should probably make this clearer
+//frequency: 3, frequency unit: week = 3 days per week
+//frequency: 3, frequency unit: month = 3 days per month
+//Thedate by is optional
+//This class extends the Goal class
 export class FrequencyGoal extends Goal {
   public value: number;
   public frequency: number;
@@ -25,6 +33,7 @@ export class FrequencyGoal extends Goal {
     this.dateBy = data.dateBy;
   }
 
+  //The constructor will pass the base data to the Goal class
   calculateFrequency(): string {
     if (this.frequency === 1 && this.frequencyUnit === "day") {
       return "every day";
@@ -37,6 +46,7 @@ export class FrequencyGoal extends Goal {
     return "";
   }
 
+  //This overrides the base class and updates the goal class with the updated data
   override updateGoal(updateData: FrequencyGoalUpdates): FrequencyGoal {
     return new FrequencyGoal({
       ...this,
@@ -44,10 +54,12 @@ export class FrequencyGoal extends Goal {
     });
   }
 
+  //This is a property that returns the description for this type of goal
   get description(): string {
     return `${this.name} ${this.value} ${this.valueUnit} a day ${this.calculateFrequency()}${this.dateBy === undefined ? "" : " until " + this.dateBy.toLocaleDateString()}`;
   }
 
+  //This overrides the base class and calculates progress by adding up all the check-ins for this goal
   override calculateProgress(checkIns: CheckIn[], endDate: Date): GoalProgress {
     const filteredCheckIns = checkIns.filter(
       (checkIn) => checkIn.goalId === this.id
@@ -59,6 +71,7 @@ export class FrequencyGoal extends Goal {
     }
   }
 
+  //Calculates the monthly progress
   calculateMonthlyProgress(checkIns: CheckIn[], endDate: Date): GoalProgress {
     //Don't add up total hours, use 20 min/day, count the days that was reached.
     const monthsOfGoal = monthsBetween(this.startDate, endDate);
@@ -93,6 +106,7 @@ export class FrequencyGoal extends Goal {
     };
   }
 
+  //Calculates the progress for daily and weekly goals
   calculateDailyOrWeeklyProgress(
     checkIns: CheckIn[],
     endDate: Date
@@ -133,6 +147,7 @@ export class FrequencyGoal extends Goal {
     };
   }
 
+  //This converts the Goal object to the Data object that will be saved in the json file
   override toData(): FrequencyGoalData {
     return {
       id: this.id,

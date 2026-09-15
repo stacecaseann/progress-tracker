@@ -11,6 +11,8 @@ import type { MenuResult } from "./menu/MenuResult.js";
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 
+//This is the starting point of the application.
+//It creates a menu and keeps going until the menu retursn running= false
 async function main(): Promise<void> {
   console.log("Starting application");
   //Load at the beginning

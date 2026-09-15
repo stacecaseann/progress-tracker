@@ -5,27 +5,38 @@ import type { CheckIn } from "../checkIns/CheckIn.js";
 import type { GoalProgress } from "./GoalProgress.js";
 import { addDay } from "./dateUtil.js";
 
+//The Streak Goal class is a goal where you try to get a streak
+//For example practice the piano 30 minutes every day
+//Exercise 20 min every day
+//Read 10 pages every day
+//The deadline is optional
+//This class extends the Goal class
 export class StreakGoal extends Goal {
   readonly type: GoalType = "streak";
   public value: number;
   public dateBy: Date | undefined;
 
+  //The constructor will pass the base data to the Goal class
   constructor(data: StreakGoalData) {
     super(data);
     this.value = data.value;
     this.dateBy = data.dateBy;
   }
 
+  //This overrides the base class and updates the goal class with the updated data
   override updateGoal(updateData: StreakGoalUpdates): StreakGoal {
     return new StreakGoal({
       ...this,
       ...updateData,
     });
   }
+
+  //This is a property that returns the description for this type of goal
   get description(): string {
     return `${this.name} ${this.value} ${this.valueUnit} every day${this.dateBy === undefined ? "" : " until " + this.dateBy.toLocaleDateString()}`;
   }
 
+  //This overrides the base class and calculates progress by adding up all the check-ins for this goal
   override calculateProgress(checkIns: CheckIn[]): GoalProgress {
     //need to see how many days in a row they have made it
     //You have a streak of _ days
@@ -35,6 +46,7 @@ export class StreakGoal extends Goal {
     return this.calculateStreak(filteredCheckIns);
   }
 
+  //Calculates the streak for reporting progress
   calculateStreak(checkIns: CheckIn[]): GoalProgress {
     const totalsByDay = new Map<string, number>();
     checkIns.forEach((checkIn) => {
@@ -63,6 +75,8 @@ export class StreakGoal extends Goal {
       description: `You have a streak of ${streak} days!`,
     };
   }
+
+  //This converts the Goal object to the Data object that will be saved in the json file
   override toData(): StreakGoalData {
     return {
       id: this.id,
