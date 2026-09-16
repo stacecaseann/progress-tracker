@@ -32,3 +32,4 @@ I wrote it in TypeScript, with test cases created in jest.
 - Work out start/end dates for the goals and progress a little better
 - Add error handling
 - Add plural/single words to descriptions
+- Fix dates for checkins
