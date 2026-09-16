@@ -1,46 +1,47 @@
 [
   {
-    "id": 1,
-    "name": "Practice Piano",
+    "id": "d2115bfa-228d-408b-acb9-51317e3eadbd",
+    "name": "Practice Spanish",
+    "type": "progress",
+    "startDate": "2026-01-01T07:00:00.000Z",
+    "value": 500,
+    "valueUnit": "hour",
+    "dateBy": "2026-12-31T07:00:00.000Z"
+  },
+  {
+    "id": "21a93a5c-dc4d-4dd4-9792-813b157b8fa7",
+    "name": "Practice programming",
     "type": "count",
-    "startDate": "2026-01-01T00:00:00.000Z",
+    "startDate": "2026-01-01T07:00:00.000Z",
     "valueUnit": "min"
   },
   {
-    "id": 2,
-    "name": "Practice Piano",
+    "id": "57693058-de2a-423a-a69c-64ad414733e3",
+    "name": "Practice the piano",
     "type": "frequency",
-    "startDate": "2026-01-01T00:00:00.000Z",
+    "startDate": "2026-01-01T07:00:00.000Z",
+    "value": 20,
+    "valueUnit": "min",
+    "frequency": 5,
+    "frequencyUnit": "week"
+  },
+  {
+    "id": "aac411be-235a-453e-8528-3d2f40753997",
+    "name": "Read",
+    "type": "streak",
+    "startDate": "2026-01-01T07:00:00.000Z",
+    "value": 20,
+    "valueUnit": "pages"
+  },
+  {
+    "id": "bd4d3431-d2aa-4f37-9041-fbfdcbc3303b",
+    "name": "Practice the guitar",
+    "type": "frequency",
+    "startDate": "2026-01-01T07:00:00.000Z",
     "value": 20,
     "valueUnit": "min",
     "frequency": 3,
-    "frequencyUnit": "day",
-    "dateBy": "2026-01-31T00:00:00.000Z"
-  },
-  {
-    "id": 3,
-    "name": "Practice Piano",
-    "type": "progress",
-    "startDate": "2026-01-01T00:00:00.000Z",
-    "value": 100,
-    "valueUnit": "min",
-    "dateBy": "2026-01-31T00:00:00.000Z"
-  },
-  {
-    "id": 4,
-    "name": "Practice Piano",
-    "type": "streak",
-    "startDate": "2026-01-01T00:00:00.000Z",
-    "value": 20,
-    "valueUnit": "min",
-    "dateBy": "2026-01-31T00:00:00.000Z"
-  },
-  {
-    "id": "b0b9aee2-32ac-4308-8e8a-b0428e048dcf",
-    "name": "Read",
-    "type": "progress",
-    "startDate": "2026-01-01T00:00:00.000Z",
-    "value": 3000,
-    "valueUnit": "pages"
+    "frequencyUnit": "week",
+    "dateBy": "2026-12-31T07:00:00.000Z"
   }
 ]

@@ -1,27 +1,22 @@
 [
   {
-    "goalId": 1,
+    "goalId": "d2115bfa-228d-408b-acb9-51317e3eadbd",
+    "checkInDate": "Invalid Date",
+    "value": 5
+  },
+  {
+    "goalId": "d2115bfa-228d-408b-acb9-51317e3eadbd",
+    "checkInDate": "Invalid Date",
+    "value": 2
+  },
+  {
+    "goalId": "d2115bfa-228d-408b-acb9-51317e3eadbd",
+    "checkInDate": "1/1/2026",
+    "value": 2
+  },
+  {
+    "goalId": "bd4d3431-d2aa-4f37-9041-fbfdcbc3303b",
     "checkInDate": "1/1/2026",
     "value": 20
-  },
-  {
-    "goalId": 1,
-    "checkInDate": "1/2/2026",
-    "value": 20
-  },
-  {
-    "goalId": 1,
-    "checkInDate": "1/3/2026",
-    "value": 20
-  },
-  {
-    "goalId": 4,
-    "checkInDate": "1/1/2026",
-    "value": 60
-  },
-  {
-    "goalId": 4,
-    "checkInDate": "1/2/2026",
-    "value": 30
   }
 ]

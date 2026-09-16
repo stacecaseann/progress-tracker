@@ -9,7 +9,7 @@ This is a simple progress tracker written in TypeScript. There are 4 different t
 
 Setting goals is my passion in life and I wanted a way to track progress a little differently than other habit apps I have used.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/Vkm--j7sL2g)
 
 # Development Environment
 
@@ -18,8 +18,6 @@ I wrote the code in Visual Studio Code.
 I wrote it in TypeScript, with test cases created in jest.
 
 # Useful Websites
-
-{Make a list of websites that you found helpful in this project}
 
 - [Web Dev Simplified](https://courses.webdevsimplified.com/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
@@ -32,3 +30,5 @@ I wrote it in TypeScript, with test cases created in jest.
 - Have a display for the days checked in
 - Create charts to report progress
 - Work out start/end dates for the goals and progress a little better
+- Add error handling
+- Add plural/single words to descriptions
